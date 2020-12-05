@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Ratio Calculator</title>
+    <meta name="theme-color" content="#0c0e22">
+    <link rel="icon" href="images/favicon.svg" type="image/svg" sizes="16x16">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="title">
+            <h1>Ratio Calculator</h1>
+        </div>
+        <div class="form-group">
+            <label>Width</label>
+            <input type="number" placeholder="Put your number" id="w" value="" />
+        </div>
+
+        <div class="form-group">
+            <label>Height</label>
+            <input type="number" placeholder="Put your number" id="h" value="" />
+        </div>
+
+        <div class="slidecontainer">
+            <input type="range" min="1" max="300" value="1" step="1" class="slider" id="myRange" title="Put any number in input fields">
+            <h4 id="display"></h4>
+        </div>
+
+
+        <small>Made with <img src="images/bxs-heart.svg" alt="Heart"> by Chiranjit</small>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script>
+        const widthInput = document.getElementById("w");
+        const heightInput = document.getElementById("h");
+
+        widthInput.addEventListener("keyup", () => {
+            console.log(widthInput.value)
+        });
+
+        heightInput.addEventListener("keyup", () => {
+            console.log(heightInput.value)
+        });
+
+        myRange.addEventListener("input", () => {
+            const log = console.log;
+
+            const w = document.getElementById("w");
+            const h = document.getElementById("h");
+
+            const myRange = document.getElementById("myRange");
+
+            const display = document.getElementById("display");
+
+            wVal = parseInt(w.value);
+            hVal = parseInt(h.value);
+
+            function gcd(x, y) {
+                if ((typeof x !== 'number') || (typeof y !== 'number'))
+                    return false;
+                x = Math.abs(x);
+                y = Math.abs(y);
+                while (y) {
+                    var t = y;
+                    y = x % y;
+                    x = t;
+                }
+                return x;
+            }
+
+            let gcdVal = gcd(wVal, hVal)
+
+            let wRatio = wVal / gcdVal;
+            let hRatio = hVal / gcdVal;
+
+            if (wVal && hVal) {
+                let rangeVal = parseInt(myRange.value);
+
+                let w_range = parseInt(wRatio * rangeVal);
+                let h_range = parseInt(hRatio * rangeVal);
+                w.value = w_range;
+                h.value = h_range;
+
+
+                log(w_range + ":" + h_range)
+
+                display.innerHTML = `${w_range} : ${h_range}`;
+            }
+        })
+
+    </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+<!---->
